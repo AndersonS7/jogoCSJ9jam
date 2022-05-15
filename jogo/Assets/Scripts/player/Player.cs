@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rig;
     private Vector2 direction;
     private bool isElevator;
+    private bool inPoint;
 
     void Start()
     {
@@ -53,22 +54,31 @@ public class Player : MonoBehaviour
 
     void DetectCollider()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, radius, layerElevator);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.4f, 0);
+        Collider2D hit = Physics2D.OverlapCircle(pos, radius, layerElevator);
 
         //controla a entrada no elevador
         if (hit != null)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) && !isElevator)
             {
+                inPoint = true;
                 isElevator = true;
                 tagElevator = hit.gameObject.tag;
+
+                if (inPoint)
+                {
+                    transform.position = hit.transform.position;
+                    inPoint = false;
+                }
             }
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.4f, 0);
+        Gizmos.DrawWireSphere(pos, radius);
     }
 
     //target
