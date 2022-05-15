@@ -14,8 +14,11 @@ public class Player : MonoBehaviour
     private bool isElevator;
     private bool inPoint;
 
+    private HackerDoor systemDoor;
+
     void Start()
     {
+        systemDoor = FindObjectOfType<HackerDoor>();
         rig = GetComponent<Rigidbody2D>();
     }
 
@@ -27,7 +30,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isElevator)
+        if (!isElevator && !systemDoor.IsHaking)
         {
             ToMove();
         }
