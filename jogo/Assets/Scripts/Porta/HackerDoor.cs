@@ -16,6 +16,7 @@ public class HackerDoor : MonoBehaviour
     private int number;
     private bool isHackDoor; //ativa quando bate na porta
     private bool isHaking; //ativa quando está hackeando
+    //private bool pointPosHacking; // leva o player para esse ponto quando ele está hackeando
 
     public bool IsHaking { get => isHaking; }
 
