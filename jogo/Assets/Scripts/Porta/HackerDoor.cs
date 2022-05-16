@@ -9,6 +9,7 @@ public class HackerDoor : MonoBehaviour
     [SerializeField] GameObject progressBar;
     [SerializeField] Image barImg;
     [SerializeField] Text error;
+    [SerializeField, Tooltip(">= Número para abrir a porta")] int amountNumberHack;
 
     private float progressBarCount;
     private float timeCount;
@@ -39,7 +40,7 @@ public class HackerDoor : MonoBehaviour
     //abre a porta
     private void SuccesHack()
     {
-        if (number >= 80)
+        if (number >= amountNumberHack)
         {
             timeCount += Time.deltaTime;
             gameObject.GetComponent<Collider2D>().enabled = false;
@@ -75,7 +76,7 @@ public class HackerDoor : MonoBehaviour
                 progressBarCount = 0;
                 progressBar.SetActive(false);
 
-                if (number <= 80)
+                if (number < amountNumberHack)
                 {
                     error.text = "ERROR!";
                     StartCoroutine("Error");

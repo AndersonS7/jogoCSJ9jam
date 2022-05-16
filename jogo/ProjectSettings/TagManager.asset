@@ -7,6 +7,7 @@ TagManager:
   - PontoA
   - PontoB
   - Elevator
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - UI
   - Ponto
   - Door
-  - 
-  - 
+  - Player
+  - Wall
   - 
   - 
   - 
