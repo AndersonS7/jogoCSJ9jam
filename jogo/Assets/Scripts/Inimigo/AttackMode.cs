@@ -32,7 +32,7 @@ public class AttackMode : MonoBehaviour
     {
         timeCount += Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position
-            , player.position, 1f * Time.deltaTime);
+            , player.position, 1.5f * Time.deltaTime);
 
         if (timeCount >= Random.Range(4, 6))
         {

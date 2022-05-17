@@ -9,6 +9,9 @@ TagManager:
   - Elevator
   - Wall
   - Floor
+  - Enemy
+  - Goo
+  - Box
   layers:
   - Default
   - TransparentFX

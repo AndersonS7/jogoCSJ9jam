@@ -16,9 +16,22 @@ public class PlayerAnim : MonoBehaviour
     void Update()
     {
         Walking();
-        IsHacking();
+        IsHacking(); 
+        Stopped();
     }
 
+    private void Stopped()
+    {
+        if (player.IsElevator)
+        {
+            anim.SetInteger("num", 0);
+        }
+
+        if (player.IsStuck)
+        {
+            anim.SetInteger("num", 0);
+        }
+    }
     private void Walking()
     {
         if (player.Direction.sqrMagnitude > 0)

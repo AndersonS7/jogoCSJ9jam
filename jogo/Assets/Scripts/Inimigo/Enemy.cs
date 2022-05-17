@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     
     [SerializeField] private float speed;
+    private Player player;
 
     //CONTROLE DE AÇÕES [ANDAR]
     private bool isDramSeg; //sorteia os segundos de espera para o inimigo andar
@@ -21,8 +22,12 @@ public class Enemy : MonoBehaviour
     private int directionAux;
     private int[] directions;
 
+    //PROPRIEDADES
+    public bool IsMoving { get => isMoving; }
+
     void Start()
     {
+        player = FindObjectOfType<Player>();
         directions = new int[] { -1, 1 };
         isMoving = true;
         directionAux = 1;
@@ -31,6 +36,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        //impede que o player seja atacado
+        if (player.IsElevator || player.GetComponent<Hide>().Hidden)
+        {
+            isAttack = false;
+        }
+
         if (!isAttack)
         {
             IsMovingControl();

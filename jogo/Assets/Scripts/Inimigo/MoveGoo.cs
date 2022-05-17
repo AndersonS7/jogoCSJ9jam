@@ -39,7 +39,7 @@ public class MoveGoo : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 0.1f);
         }
         if (collision.CompareTag("Wall"))
         {
