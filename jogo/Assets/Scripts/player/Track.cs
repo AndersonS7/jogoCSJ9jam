@@ -29,10 +29,12 @@ public class Track : MonoBehaviour
             trakcs = GameObject.FindGameObjectsWithTag("Track");
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && totalTrack > 0)
+        if (Input.GetKeyDown(KeyCode.E) && indexTrack < trakcs.Length && trakcs.Length > 0)
         {
             trakcs[indexTrack].name = "active";
             indexTrack++;
         }
+
+        Debug.Log("total index: " + indexTrack);
     }
 }

@@ -17,7 +17,7 @@ public class EnemyAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemy.IsMoving || enemy.IsAttack)
+        if (enemy.IsMoving || enemy.IsAttack || enemy.GetComponent<AttackMode>().AttackT)
         {
             anim.SetInteger("num", 1);
         }

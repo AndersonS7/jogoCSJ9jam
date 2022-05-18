@@ -19,23 +19,26 @@ public class Enemy : MonoBehaviour
     public bool IsAttack { get => isAttack; }
 
     //CONTROLE DE DIREÇÃO
-    private int directionAux;
+    private int direction;
     private int[] directions;
 
     //PROPRIEDADES
     public bool IsMoving { get => isMoving; }
+    public int Direction { get => direction; set => direction = value; }
 
     void Start()
     {
         player = FindObjectOfType<Player>();
         directions = new int[] { -1, 1 };
         isMoving = true;
-        directionAux = 1;
+        direction = 1;
         isDramSeg = true;
     }
 
     void Update()
     {
+        DirectionControl();
+
         //impede que o player seja atacado
         if (player != null)
         {
@@ -45,7 +48,7 @@ public class Enemy : MonoBehaviour
             }
         }
         
-        if (!isAttack)
+        if (!isAttack && !gameObject.GetComponent<AttackMode>().AttackT)
         {
             IsMovingControl();
             ToMove();
@@ -60,7 +63,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Direction(int direction)
+    private void DirectionControl()
     {
         if (direction == 1)
         {
@@ -84,8 +87,7 @@ public class Enemy : MonoBehaviour
 
         if (timeCount >= segMoving)
         {
-            directionAux = directions[Random.Range(0, directions.Length)];
-            Direction(directionAux);
+            direction = directions[Random.Range(0, directions.Length)];
 
             if (isMoving)
             {
@@ -106,15 +108,13 @@ public class Enemy : MonoBehaviour
         //quando bater na parede
         if (collision.collider.CompareTag("Wall"))
         {
-            if (directionAux == 1)
+            if (direction == 1)
             {
-                Direction(-1);
-                directionAux = -1;
+                direction = -1;
             }
-            else if (directionAux == -1)
+            else if (direction == -1)
             {
-                Direction(1);
-                directionAux = 1;
+                direction = 1;
             }
         }
     }
@@ -124,16 +124,6 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isAttack = true;
-
-            // MELHORAR ESSE SISTEMA DE VIRAR, QUANDO O INIMIGO ENCONSTAR NO PLAYER
-            if (collision.gameObject.transform.position.x - transform.position.x > 0)
-            {
-                transform.eulerAngles = new Vector2(0, 180);
-            }
-            else if (collision.gameObject.transform.position.x - transform.position.x < 0)
-            {
-                transform.eulerAngles = new Vector2(0, 180);
-            }
         }
     }
 

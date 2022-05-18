@@ -7,11 +7,14 @@ public class AttackMode : MonoBehaviour
     [SerializeField] private GameObject goo;
     [SerializeField] private Transform player;
 
+    private float timeCount;
     private GameObject target;
     private bool isShoot; //controla quando o inimigo pode ou não atirar
+    private bool attackT; //indica para o animator quando o inimigo está correndo atrás da armadilha
+
     private Enemy enemy;
 
-    private float timeCount;
+    public bool AttackT { get => attackT; }
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,21 @@ public class AttackMode : MonoBehaviour
         
         if (enemy.IsAttack)
         {
+            DirectionControl(player);
             Attack();
+        }
+    }
+
+    public void DirectionControl(Transform obj) // 0 => player || 1 => outros
+    {
+        if (obj.position.x - transform.position.x > 0)
+        {
+            enemy.Direction = 1;
+        }
+
+        if (obj.position.x - transform.position.x < 0)
+        {
+            enemy.Direction = -1;
         }
     }
 
@@ -56,8 +73,15 @@ public class AttackMode : MonoBehaviour
         
         if (target != null)
         {
+            attackT = true;
+            DirectionControl(target.transform);
+
             transform.position = Vector3.MoveTowards(transform.position
             , target.transform.position, 2f * Time.deltaTime);
+        }
+        else
+        {
+            attackT = false;
         }
     }
 }
