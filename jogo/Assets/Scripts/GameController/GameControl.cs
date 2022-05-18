@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-
     [SerializeField] GameObject gameOver;
 
     private void Start()

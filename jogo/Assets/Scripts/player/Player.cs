@@ -17,29 +17,23 @@ public class Player : MonoBehaviour
 
     private bool isElevator;
     private bool inPoint; // seta a posição quando está no elevador
-    private bool inPointHacking; // seta a posição quando está hackeando
 
     //controla quando o inimigo atinge o player
     private bool isStuck; //indica quando o player está preso;
     private int numberScape; //numero de vezes que o player deve clicar para escapar
 
-    private HackerDoor systemDoor;
-
     public bool IsElevator { get => isElevator; }
-    public HackerDoor SystemDoor { get => systemDoor; }
     public Vector2 Direction { get => direction; }
     public bool IsStuck { get => isStuck; }
 
     void Start()
     {
         saveSpeed = speed;
-        systemDoor = FindObjectOfType<HackerDoor>();
         rig = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        SetPosition();
         DetectCollider();
         MoveElevator();
         Scape();
@@ -47,7 +41,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isElevator && !systemDoor.IsHaking)
+        if (!isElevator)
         {
             ToMove();
         }
@@ -93,21 +87,6 @@ public class Player : MonoBehaviour
                 isStuck = false;
                 numberScape = 0;
             }
-        }
-    }
-
-    void SetPosition()
-    {
-        if (systemDoor.IsHaking && inPointHacking)
-        {
-            inPointHacking = false;
-            transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
-        }
-
-        // pode voltar a posição quando termina de hackear
-        if (!systemDoor.IsHaking)
-        {
-            inPointHacking = true;
         }
     }
 

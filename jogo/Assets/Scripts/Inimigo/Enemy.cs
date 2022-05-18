@@ -37,11 +37,14 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //impede que o player seja atacado
-        if (player.IsElevator || player.GetComponent<Hide>().Hidden)
+        if (player != null)
         {
-            isAttack = false;
+            if (player.IsElevator || player.GetComponent<Hide>().Hidden)
+            {
+                isAttack = false;
+            }
         }
-
+        
         if (!isAttack)
         {
             IsMovingControl();
@@ -121,6 +124,16 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isAttack = true;
+
+            // MELHORAR ESSE SISTEMA DE VIRAR, QUANDO O INIMIGO ENCONSTAR NO PLAYER
+            if (collision.gameObject.transform.position.x - transform.position.x > 0)
+            {
+                transform.eulerAngles = new Vector2(0, 180);
+            }
+            else if (collision.gameObject.transform.position.x - transform.position.x < 0)
+            {
+                transform.eulerAngles = new Vector2(0, 180);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ public class AttackMode : MonoBehaviour
     [SerializeField] private GameObject goo;
     [SerializeField] private Transform player;
 
+    private GameObject target;
     private bool isShoot; //controla quando o inimigo pode ou não atirar
     private Enemy enemy;
 
@@ -22,6 +23,8 @@ public class AttackMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AttackTrack();
+        
         if (enemy.IsAttack)
         {
             Attack();
@@ -44,6 +47,17 @@ public class AttackMode : MonoBehaviour
         {
             Instantiate(goo, transform.position, Quaternion.identity);
             isShoot = true;
+        }
+    }
+
+    private void AttackTrack()
+    {
+        target = GameObject.Find("active");
+        
+        if (target != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position
+            , target.transform.position, 2f * Time.deltaTime);
         }
     }
 }

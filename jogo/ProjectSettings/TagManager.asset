@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Goo
   - Box
+  - Track
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Door
   - Player
   - Wall
-  - 
+  - Enemy
   - 
   - 
   - 

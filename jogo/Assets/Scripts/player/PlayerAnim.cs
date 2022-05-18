@@ -16,7 +16,6 @@ public class PlayerAnim : MonoBehaviour
     void Update()
     {
         Walking();
-        IsHacking(); 
         Stopped();
     }
 
@@ -41,14 +40,6 @@ public class PlayerAnim : MonoBehaviour
         else
         {
             anim.SetInteger("num", 0);
-        }
-    }
-
-    private void IsHacking()
-    {
-        if (player.SystemDoor.IsHaking)
-        {
-            anim.SetInteger("num", 2);
         }
     }
 }
