@@ -19,7 +19,8 @@ public class Nave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shot();
+        FollowMouse();
+        //Shot();
     }
 
     private void Shot()
@@ -27,7 +28,7 @@ public class Nave : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             FollowMouse();
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            //Instantiate(bullet, transform.position, Quaternion.identity);
         }
     }
 
@@ -36,6 +37,8 @@ public class Nave : MonoBehaviour
         pos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(pos);
 
-        transform.rotation = Quaternion.EulerAngles(mousePos);
+        Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+
+        transform.right = direction; // Up, Down, Left e Right funcionam, cada uma para um lado direfente
     }
 }

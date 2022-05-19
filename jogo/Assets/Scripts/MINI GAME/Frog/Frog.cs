@@ -53,7 +53,7 @@ public class Frog : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
-            PlayerPrefs.SetString("hack", "true");
+            PlayerPrefs.SetString("hack", "door");
             PlayerPrefs.Save();
 
             finish = true;

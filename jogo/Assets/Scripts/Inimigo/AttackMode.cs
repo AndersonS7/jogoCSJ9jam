@@ -9,6 +9,7 @@ public class AttackMode : MonoBehaviour
 
     private float timeCount;
     private GameObject target;
+    private GameObject[] targets;
     private bool isShoot; //controla quando o inimigo pode ou não atirar
     private bool attackT; //indica para o animator quando o inimigo está correndo atrás da armadilha
 
@@ -70,21 +71,26 @@ public class AttackMode : MonoBehaviour
 
     private void AttackTrack()
     {
-        target = GameObject.Find("active");
-        //identifica se o inimigo está na mesma linha que a armadilha
-        if (target != null 
-            && target.transform.position.y + 5 >= transform.position.y
-            && target.transform.position.y - 5 <= transform.position.y)
-        {
-            attackT = true;
-            DirectionControl(target.transform);
+        targets = GameObject.FindGameObjectsWithTag("Track");
 
-            transform.position = Vector3.MoveTowards(transform.position
-            , target.transform.position, 2f * Time.deltaTime);
-        }
-        else
+        foreach (var target in targets)
         {
-            attackT = false;
+            //identifica se o inimigo está na mesma linha que a armadilha
+            if (target != null 
+                && target.name == "active"
+                && target.transform.position.y + 2 >= transform.position.y
+                && target.transform.position.y - 2 <= transform.position.y)
+            {
+                attackT = true;
+                DirectionControl(target.transform);
+
+                transform.position = Vector3.MoveTowards(transform.position
+                , target.transform.position, 2f * Time.deltaTime);
+            }
+            else
+            {
+                attackT = false;
+            }
         }
     }
 }
