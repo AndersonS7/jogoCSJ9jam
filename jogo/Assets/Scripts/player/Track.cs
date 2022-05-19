@@ -8,7 +8,7 @@ public class Track : MonoBehaviour
     [SerializeField] private Transform point;
     [SerializeField] private GameObject[] trakcs;
 
-    [SerializeField] private int index;
+    private int index; //essa variavel está sendo usada no script da armadilha
     private int totalTrack;
 
     public int Index { set => index = value; }

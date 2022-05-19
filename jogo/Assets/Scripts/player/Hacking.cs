@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Hacking : MonoBehaviour
 {
-    //[SerializeField] private GameObject msgPanelDoor;
+    [SerializeField] private Color openDoorColor;
 
     private GameObject systemDoor;
     private Transform door;
@@ -13,7 +13,6 @@ public class Hacking : MonoBehaviour
     private bool hack; //mostra quando o player está hackeando 
     private bool collided;
     private float timeCount; //tempo para chamar a sena
-    private float timeOpenDoor; //tempo para abrir a porta
 
     public bool Hack { get => hack; }
 
@@ -28,7 +27,7 @@ public class Hacking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //DetectCollider();
+        UpdateDoor(); //guarda as portas que já foram abertas e as matem abertas
         CheckHack();
         Invader();
 
@@ -99,16 +98,18 @@ public class Hacking : MonoBehaviour
 
     private void OpenDoor()
     {
-        timeOpenDoor += Time.deltaTime;
-
-        door = GameObject.Find($"{PlayerPrefs.GetString("currentdoor")}").gameObject.transform;
-
-        if (timeOpenDoor < 1.5f)
+        if (PlayerPrefs.GetString("currentdoor") != "")
         {
-            door.transform.Translate(Vector2.up * 1.8f * Time.deltaTime);
-        }
-        if (timeOpenDoor > 1.5f)
-        {
+            door = GameObject.Find($"{PlayerPrefs.GetString("currentdoor")}").gameObject.transform;
+            door.GetComponent<SpriteRenderer>().color = openDoorColor;
+            door.GetComponent<Collider2D>().enabled = false;
+
+            //guarda o nome da porta na lista de portas
+            string arrayTemp = PlayerPrefs.GetString("listDoor");
+            arrayTemp = arrayTemp + door.name + ",";
+            PlayerPrefs.SetString("listDoor", arrayTemp);
+            PlayerPrefs.Save();
+
             //restaurar o valor do hack
             PlayerPrefs.DeleteKey("hack");
             PlayerPrefs.DeleteKey("currentdoor");
@@ -116,6 +117,24 @@ public class Hacking : MonoBehaviour
         }
     }
 
+    private void UpdateDoor()
+    {
+        if (PlayerPrefs.GetString("listDoor") != null && PlayerPrefs.GetString("listDoor") != "")
+        {
+            string[] arrayTemp = PlayerPrefs.GetString("listDoor").Split(',');
+
+            foreach (string item in arrayTemp)
+            {
+                if (GameObject.Find(item) != null)
+                {
+                    GameObject.Find(item).GetComponent<SpriteRenderer>().color = openDoorColor;
+                    GameObject.Find(item).GetComponent<Collider2D>().enabled = false;
+                }   
+            }
+        }
+    }
+
+    //colisões
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DoorSistem"))
