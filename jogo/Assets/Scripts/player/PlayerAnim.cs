@@ -7,16 +7,19 @@ public class PlayerAnim : MonoBehaviour
     [SerializeField] Animator anim;
 
     private Player player;
+    private Hacking hack;
 
     void Start()
     {
         player = GetComponent<Player>();
+        hack = GetComponent<Hacking>();
     }
 
     void Update()
     {
         Walking();
         Stopped();
+        Hack();
     }
 
     private void Stopped()
@@ -40,6 +43,14 @@ public class PlayerAnim : MonoBehaviour
         else
         {
             anim.SetInteger("num", 0);
+        }
+    }
+
+    private void Hack()
+    {
+        if (hack.Hack)
+        {
+            anim.SetInteger("num", 2);
         }
     }
 }

@@ -21,7 +21,7 @@ public class Track : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && totalTrack > 0)
+        if (Input.GetKeyDown(KeyCode.T) && totalTrack > 0)
         {
             Instantiate(track, point.position, Quaternion.identity);
             totalTrack--;
@@ -31,10 +31,11 @@ public class Track : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && indexTrack < trakcs.Length && trakcs.Length > 0)
         {
-            trakcs[indexTrack].name = "active";
-            indexTrack++;
+            if (trakcs[indexTrack] != null)
+            {
+                trakcs[indexTrack].name = "active";
+                indexTrack++;
+            }
         }
-
-        Debug.Log("total index: " + indexTrack);
     }
 }

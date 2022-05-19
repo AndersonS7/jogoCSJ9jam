@@ -13,6 +13,7 @@ TagManager:
   - Goo
   - Box
   - Track
+  - DoorSistem
   layers:
   - Default
   - TransparentFX
@@ -49,4 +50,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: JOGO
+    uniqueID: 3796386695
     locked: 0

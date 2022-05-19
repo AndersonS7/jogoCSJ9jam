@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isElevator)
+        if (!isElevator && !GetComponent<Hacking>().Hack)
         {
             ToMove();
         }
