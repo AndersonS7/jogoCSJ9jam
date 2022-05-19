@@ -6,15 +6,16 @@ public class Track : MonoBehaviour
 {
     [SerializeField] private GameObject track;
     [SerializeField] private Transform point;
-
     [SerializeField] private GameObject[] trakcs;
-    private int indexTrack;
+
+    [SerializeField] private int index;
     private int totalTrack;
+
+    public int Index { set => index = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        indexTrack = 0;
         totalTrack = 2;
     }
 
@@ -29,12 +30,12 @@ public class Track : MonoBehaviour
             trakcs = GameObject.FindGameObjectsWithTag("Track");
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && indexTrack < trakcs.Length && trakcs.Length > 0)
+        if (Input.GetKeyDown(KeyCode.E) && index < trakcs.Length && trakcs.Length > 0)
         {
-            if (trakcs[indexTrack] != null)
+            if (trakcs[index] != null)
             {
-                trakcs[indexTrack].name = "active";
-                indexTrack++;
+                trakcs[index].name = "active";
+                index++;
             }
         }
     }

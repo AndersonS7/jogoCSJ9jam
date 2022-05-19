@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackMode : MonoBehaviour
 {
     [SerializeField] private GameObject goo;
-    [SerializeField] private Transform player;
+    [SerializeField] private GameObject player;
 
     private float timeCount;
     private GameObject target;
@@ -21,16 +21,17 @@ public class AttackMode : MonoBehaviour
     {
         isShoot = false;
         enemy = GetComponent<Enemy>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
         AttackTrack();
-        
+
         if (enemy.IsAttack)
         {
-            DirectionControl(player);
+            DirectionControl(player.transform);
             Attack();
         }
     }
@@ -52,7 +53,7 @@ public class AttackMode : MonoBehaviour
     {
         timeCount += Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position
-            , player.position, 1.5f * Time.deltaTime);
+            , player.transform.position, 1.5f * Time.deltaTime);
 
         if (timeCount >= Random.Range(4, 6))
         {
@@ -70,8 +71,10 @@ public class AttackMode : MonoBehaviour
     private void AttackTrack()
     {
         target = GameObject.Find("active");
-        
-        if (target != null)
+        //identifica se o inimigo está na mesma linha que a armadilha
+        if (target != null 
+            && target.transform.position.y + 5 >= transform.position.y
+            && target.transform.position.y - 5 <= transform.position.y)
         {
             attackT = true;
             DirectionControl(target.transform);
