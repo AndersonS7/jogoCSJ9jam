@@ -16,7 +16,7 @@ public class Track : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        totalTrack = 2;
+        totalTrack = 0;
     }
 
     // Update is called once per frame
@@ -37,6 +37,15 @@ public class Track : MonoBehaviour
                 trakcs[index].name = "active";
                 index++;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish"))
+        {
+            totalTrack++;
+            Destroy(collision.gameObject);
         }
     }
 }
