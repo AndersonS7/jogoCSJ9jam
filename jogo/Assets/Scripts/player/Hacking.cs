@@ -55,8 +55,7 @@ public class Hacking : MonoBehaviour
             hack = true;
             //msgPanelDoor.SetActive(true);
             transform.position = systemDoor.transform.GetChild(1).transform.position;
-            systemDoor.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
-            //transform.position = posHackDoor.position;
+            systemDoor.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
 
             //guardar a posição do player
             PlayerPrefs.SetFloat("PosX", transform.position.x);
@@ -64,7 +63,7 @@ public class Hacking : MonoBehaviour
             PlayerPrefs.Save();
 
             //salva o nome da porta para poder usar quando voltar do hack
-            door = systemDoor.transform.GetChild(0);
+            door = systemDoor.transform.GetChild(2);
             PlayerPrefs.SetString("currentdoor", door.name);
         }
     }
