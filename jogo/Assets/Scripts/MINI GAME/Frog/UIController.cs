@@ -9,8 +9,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image bar;
     [SerializeField] private GameObject gameOver;
 
+    private bool gameOverBool;
     private float timeCurrent;
     private Frog frog;
+
+    public bool GameOverBool { get => gameOverBool; }
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,7 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverBool = true;
         gameOver.SetActive(true);
         StartCoroutine("LoadScene");
     }

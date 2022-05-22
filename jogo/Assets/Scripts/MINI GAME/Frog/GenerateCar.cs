@@ -19,6 +19,8 @@ public class GenerateCar : MonoBehaviour
 
         Instantiate(carLeft, pointsA[Random.Range(0, pointsA.Length)].transform.position, Quaternion.identity);
         Instantiate(carRight, pointsB[Random.Range(0, pointsB.Length)].transform.position, Quaternion.identity);
+        Instantiate(carLeft, pointsA[Random.Range(0, pointsA.Length)].transform.position, Quaternion.identity);
+        Instantiate(carRight, pointsB[Random.Range(0, pointsB.Length)].transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame

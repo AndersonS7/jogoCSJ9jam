@@ -6,6 +6,8 @@ using UnityEngine;
 public class Hacking : MonoBehaviour
 {
     [SerializeField] private Color openDoorColor;
+    [SerializeField] private GameObject soundHack;
+    [SerializeField] private GameObject soundOpenDoor;
 
     private GameObject systemDoor;
     private Transform door;
@@ -22,6 +24,8 @@ public class Hacking : MonoBehaviour
         //PlayerPrefs.DeleteAll();
         //PlayerPrefs.Save();
         LoadPosition();
+        soundHack.SetActive(false);
+        soundOpenDoor.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,7 +39,7 @@ public class Hacking : MonoBehaviour
         {
             timeCount += Time.deltaTime;
 
-            if (timeCount > 1f)
+            if (timeCount > 1.5f)
             {
                 SceneManager.LoadScene("MiniGame");
             }
@@ -47,6 +51,9 @@ public class Hacking : MonoBehaviour
     {
         if (collided && Input.GetKeyDown(KeyCode.E))
         {
+            //ativa o som
+            soundHack.SetActive(true);
+            
             //indica se o jogador já foi para o minigame ou não
             PlayerPrefs.SetString("minigame", "true");
             PlayerPrefs.Save();
@@ -91,6 +98,7 @@ public class Hacking : MonoBehaviour
     {
         if (PlayerPrefs.GetString("hack") == "door")
         {
+            soundOpenDoor.SetActive(true);
             OpenDoor();
         }
     }
@@ -128,6 +136,7 @@ public class Hacking : MonoBehaviour
                 {
                     GameObject.Find(item).GetComponent<SpriteRenderer>().color = openDoorColor;
                     GameObject.Find(item).GetComponent<Collider2D>().enabled = false;
+                    GameObject.Find(item).transform.parent.GetComponent<Collider2D>().enabled = false;
                 }   
             }
         }

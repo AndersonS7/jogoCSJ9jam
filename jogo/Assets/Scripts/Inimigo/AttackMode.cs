@@ -29,7 +29,6 @@ public class AttackMode : MonoBehaviour
     void Update()
     {
         AttackTrack();
-        Debug.Log(attackT);
 
         if (enemy.IsAttack)
         {

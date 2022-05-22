@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class CarLeft : MonoBehaviour
 {
+    //colores
+    [SerializeField] private Color[] colors = new Color[4];
+
+    private UIController uiController;
+    private Frog frog;
+
+    void Start()
+    {
+        UpdateColor();
+        uiController = FindObjectOfType<UIController>();
+        frog = FindObjectOfType<Frog>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.left * 2 * Time.deltaTime);
+        if (!uiController.GameOverBool && !frog.Finish)
+        {
+            transform.Translate(Vector2.left * 2 * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,5 +32,10 @@ public class CarLeft : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void UpdateColor()
+    {
+        GetComponent<SpriteRenderer>().color = colors[Random.Range(0, colors.Length)];
     }
 }

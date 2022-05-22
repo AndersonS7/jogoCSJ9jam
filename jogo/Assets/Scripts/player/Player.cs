@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask layerElevator;
     [SerializeField] GameObject gameOver;
     [SerializeField] private int amountNumberScape ;//armazena os clicks
+    [SerializeField] private GameObject cola;
+
+    private GameControl gameControl;
 
     private float saveSpeed;
     private string tagElevator;
     private Rigidbody2D rig;
     private Vector2 direction;
+    private FeedBack feedBackPaused;
 
     private bool isElevator;
     private bool inPoint; // seta a posição quando está no elevador
@@ -28,12 +32,23 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        feedBackPaused = FindObjectOfType<FeedBack>();
+        gameControl = FindObjectOfType<GameControl>();
         saveSpeed = speed;
         rig = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        if (isStuck)
+        {
+            cola.SetActive(true);
+        }
+        else
+        {
+            cola.SetActive(false);
+        }
+
         DetectCollider();
         MoveElevator();
         Scape();
@@ -41,7 +56,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isElevator && !GetComponent<Hacking>().Hack)
+        if (!isElevator
+            && !GetComponent<Hacking>().Hack
+            && !gameControl.Pause
+            && !feedBackPaused.Paused)
         {
             ToMove();
         }
@@ -126,7 +144,8 @@ public class Player : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             gameOver.SetActive(true);
-            Time.timeScale = 0;
+            PlayerPrefs.DeleteAll();
+            //Time.timeScale = 0;
             Destroy(gameObject);
         }
     }

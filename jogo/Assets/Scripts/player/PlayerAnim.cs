@@ -8,9 +8,11 @@ public class PlayerAnim : MonoBehaviour
 
     private Player player;
     private Hacking hack;
+    private FeedBack feedBack;
 
     void Start()
     {
+        feedBack = FindObjectOfType<FeedBack>();
         player = GetComponent<Player>();
         hack = GetComponent<Hacking>();
     }
@@ -36,7 +38,7 @@ public class PlayerAnim : MonoBehaviour
     }
     private void Walking()
     {
-        if (player.Direction.sqrMagnitude > 0)
+        if (player.Direction.sqrMagnitude > 0 && !feedBack.Paused)
         {
             anim.SetInteger("num", 1);
         }
