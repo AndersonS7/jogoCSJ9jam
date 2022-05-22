@@ -45,11 +45,32 @@ public class FeedBack : MonoBehaviour
             numTutorial++;
             msg.text = hack;
         }
+        if (collision.CompareTag("Elevator"))
+        {
+            feedBackBool = true;
+            numTutorial++;
+            msg.text = elevator;
+        }
+        if (collision.CompareTag("Finish"))
+        {
+            feedBackBool = true;
+            numTutorial++;
+            msg.fontSize = 70;
+            msg.text = trap1;
+        }
+        if (collision.CompareTag("Box"))
+        {
+            feedBackBool = true;
+            numTutorial++;
+            msg.fontSize = 70;
+            msg.text = hide;
+        }
     }
 
     public void NotPause()
     {
+        feedBackBool = false;
         paused = false;
-        feedBack.gameObject.SetActive(true);
+        feedBack.gameObject.SetActive(false);
     }
 }
