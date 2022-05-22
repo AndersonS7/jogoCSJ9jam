@@ -12,6 +12,8 @@ public class AttackMode : MonoBehaviour
     [SerializeField]  private GameObject[] targets;
     private bool isShoot; //controla quando o inimigo pode ou não atirar
     private bool attackT; //indica para o animator quando o inimigo está correndo atrás da armadilha
+    private AudioSource songAttack;
+    private bool songTrue;
 
     private Enemy enemy;
 
@@ -20,6 +22,7 @@ public class AttackMode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        songAttack = transform.GetChild(0).GetComponent<AudioSource>();
         isShoot = false;
         enemy = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -85,6 +88,13 @@ public class AttackMode : MonoBehaviour
                 attackT = true;
                 DirectionControl(target.transform);
 
+                //ativa o som
+                if (!songTrue)
+                {
+                    StartCoroutine("Song");
+                    songTrue = true;
+                }
+
                 transform.position = Vector3.MoveTowards(transform.position
                 , target.transform.position, 2f * Time.deltaTime);
             }
@@ -94,5 +104,16 @@ public class AttackMode : MonoBehaviour
         {
             attackT = false;
         }
+    }
+
+    IEnumerator Song()
+    {
+        songAttack.gameObject.SetActive(true);
+        songAttack.Play();
+
+        yield return new WaitForSeconds(Random.Range(2f, 3.5f));
+        songAttack.gameObject.SetActive(true);
+        songAttack.Play();
+        songTrue = false;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
+    [SerializeField] private GameObject song;
     [SerializeField] private float speed;
     private Player player;
 
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
         isMoving = true;
         direction = 1;
         isDramSeg = true;
+        song = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -124,6 +125,8 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isAttack = true;
+            song.SetActive(true);
+            song.GetComponent<AudioSource>().Play();
         }
     }
 

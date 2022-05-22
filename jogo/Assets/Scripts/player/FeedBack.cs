@@ -10,12 +10,10 @@ public class FeedBack : MonoBehaviour
     [SerializeField] private Text msg;
     [SerializeField, TextArea] private string hack;
     [SerializeField, TextArea] private string elevator;
-    [SerializeField, TextArea] private string trap1;
-    [SerializeField, TextArea] private string trap2;
+    [SerializeField, TextArea] private string trap;
     [SerializeField, TextArea] private string hide;
 
-    private int numTutorial;
-    private bool completedTutorial;
+    private int tutorialNum;
     private bool feedBackBool;
     private bool paused;
 
@@ -24,7 +22,7 @@ public class FeedBack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        tutorialNum = -1;
     }
 
     // Update is called once per frame
@@ -39,31 +37,35 @@ public class FeedBack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("DoorSistem"))
+        if (PlayerPrefs.GetString("tutorial") != "completo")
         {
-            feedBackBool = true;
-            numTutorial++;
-            msg.text = hack;
-        }
-        if (collision.CompareTag("Elevator"))
-        {
-            feedBackBool = true;
-            numTutorial++;
-            msg.text = elevator;
-        }
-        if (collision.CompareTag("Finish"))
-        {
-            feedBackBool = true;
-            numTutorial++;
-            msg.fontSize = 70;
-            msg.text = trap1;
-        }
-        if (collision.CompareTag("Box"))
-        {
-            feedBackBool = true;
-            numTutorial++;
-            msg.fontSize = 70;
-            msg.text = hide;
+            if (collision.CompareTag("DoorSistem") && tutorialNum < 0)
+            {
+                feedBackBool = true;
+                tutorialNum = 0;
+                msg.text = hack;
+            }
+            if (collision.CompareTag("Box") && tutorialNum < 1)
+            {
+                feedBackBool = true;
+                tutorialNum = 1;
+                msg.text = hide;
+            }
+            if (collision.CompareTag("Elevator") && tutorialNum < 2)
+            {
+                feedBackBool = true;
+                tutorialNum = 2;
+                msg.text = elevator;
+            }
+            if (collision.CompareTag("Finish") && tutorialNum < 3) //armadilha
+            {
+                feedBackBool = true;
+                tutorialNum = 3;
+                msg.text = trap;
+
+                PlayerPrefs.SetString("tutorial", "completo");
+                PlayerPrefs.Save();
+            }
         }
     }
 
