@@ -19,6 +19,7 @@ ScriptsOnlyBuild:
     - Player
     - PlayerAnim
     - Song
+    - StoryControl
     - Track
     - UIController
     Cinemachine.dll:
@@ -49,10 +50,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -102,7 +101,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4036}
     - Class: 114
-      Script: {instanceID: 6026}
+      Script: {instanceID: 6028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -304,6 +303,57 @@ ScriptsOnlyBuild:
     - Class: 687078895
       Script: {instanceID: 0}
     - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/Scenes/Story.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1456}
+    - Class: 114
+      Script: {instanceID: 1524}
+    - Class: 114
+      Script: {instanceID: 2766}
+    - Class: 114
+      Script: {instanceID: 2960}
+    - Class: 114
+      Script: {instanceID: 3208}
+    - Class: 114
+      Script: {instanceID: 3474}
+    - Class: 114
+      Script: {instanceID: 3606}
+    - Class: 114
+      Script: {instanceID: 5898}
+    - Class: 114
+      Script: {instanceID: 6028}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -1196,6 +1246,12 @@ ScriptsOnlyBuild:
     className: CarRight
   - hash:
       serializedVersion: 2
+      Hash: a0c997079a2e5a64355dba68a255ea1d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StoryControl
+  - hash:
+      serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1251,6 +1307,7 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
+  - Assets/Scenes/Story.unity
   - Assets/Scenes/Scene.unity
   - Assets/Scenes/MiniGame.unity
   playerPath: C:/Users/ander/Desktop/TESTES PC/jogo.exe

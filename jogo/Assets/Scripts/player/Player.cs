@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+
+        //controla quando o player está preso
         if (isStuck)
         {
             btn.SetActive(true);
@@ -134,7 +136,7 @@ public class Player : MonoBehaviour
                 inPoint = true;
                 isElevator = true;
                 tagElevator = hit.gameObject.tag;
-
+                
                 if (inPoint)
                 {
                     transform.position = hit.transform.position;
