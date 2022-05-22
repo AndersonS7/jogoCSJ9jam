@@ -8,10 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask layerElevator;
     [SerializeField] GameObject gameOver;
-    [SerializeField] private int amountNumberScape ;//armazena os clicks
+    [SerializeField] private int amountNumberScape;//armazena os clicks
     [SerializeField] private GameObject cola;
 
     private GameControl gameControl;
+    private GameObject btn; //quando o player estiver preso
 
     private float saveSpeed;
     private string tagElevator;
@@ -36,16 +37,28 @@ public class Player : MonoBehaviour
         gameControl = FindObjectOfType<GameControl>();
         saveSpeed = speed;
         rig = GetComponent<Rigidbody2D>();
+        btn = transform.GetChild(0).gameObject;
     }
 
     private void Update()
     {
         if (isStuck)
         {
+            btn.SetActive(true);
             cola.SetActive(true);
+
+            if (transform.localScale.x == -2)
+            {
+                btn.transform.localScale = new Vector3(-0.8f, 0.8f, btn.transform.position.z);
+            }
+            else
+            {
+                btn.transform.localScale = new Vector3(0.8f, 0.8f, btn.transform.position.z);
+            }
         }
         else
         {
+            btn.SetActive(false);
             cola.SetActive(false);
         }
 
