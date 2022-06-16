@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
                 inPoint = true;
                 isElevator = true;
                 tagElevator = hit.gameObject.tag;
-                
+
                 if (inPoint)
                 {
                     transform.position = hit.transform.position;
@@ -158,8 +158,8 @@ public class Player : MonoBehaviour
         //game over
         if (collision.collider.CompareTag("Enemy"))
         {
+            PlayerPrefs.SetInt("dead", 1);
             gameOver.SetActive(true);
-            PlayerPrefs.DeleteAll();
             //Time.timeScale = 0;
             Destroy(gameObject);
         }

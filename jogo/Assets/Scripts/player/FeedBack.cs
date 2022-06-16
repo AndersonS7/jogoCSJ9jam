@@ -22,7 +22,14 @@ public class FeedBack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tutorialNum = -1;
+        if (PlayerPrefs.GetInt("tutor") > -1)
+        {
+            tutorialNum = PlayerPrefs.GetInt("tutor");
+        }
+        else
+        {
+            tutorialNum = -1;
+        }
     }
 
     // Update is called once per frame
@@ -37,35 +44,34 @@ public class FeedBack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (PlayerPrefs.GetString("tutorial") != "completo")
+        if (collision.CompareTag("DoorSistem") && tutorialNum < 0)
         {
-            if (collision.CompareTag("DoorSistem") && tutorialNum < 0)
-            {
-                feedBackBool = true;
-                tutorialNum = 0;
-                msg.text = hack;
-            }
-            if (collision.CompareTag("Box") && tutorialNum < 1)
-            {
-                feedBackBool = true;
-                tutorialNum = 1;
-                msg.text = hide;
-            }
-            if (collision.CompareTag("Elevator") && tutorialNum < 2)
-            {
-                feedBackBool = true;
-                tutorialNum = 2;
-                msg.text = elevator;
-            }
-            if (collision.CompareTag("Finish") && tutorialNum < 3) //armadilha
-            {
-                feedBackBool = true;
-                tutorialNum = 3;
-                msg.text = trap;
+            feedBackBool = true;
+            tutorialNum = 0;
+            msg.text = hack;
+            PlayerPrefs.SetInt("tutor", tutorialNum);
+        }
+        if (collision.CompareTag("Box") && tutorialNum < 1)
+        {
+            feedBackBool = true;
+            tutorialNum = 1;
+            msg.text = hide;
+            PlayerPrefs.SetInt("tutor", tutorialNum);
+        }
+        if (collision.CompareTag("Elevator") && tutorialNum < 2)
+        {
+            feedBackBool = true;
+            tutorialNum = 2;
+            msg.text = elevator;
+            PlayerPrefs.SetInt("tutor", tutorialNum);
+        }
+        if (collision.CompareTag("Finish") && tutorialNum < 3) //armadilha
+        {
+            feedBackBool = true;
+            tutorialNum = 3;
+            msg.text = trap;
 
-                PlayerPrefs.SetString("tutorial", "completo");
-                PlayerPrefs.Save();
-            }
+            PlayerPrefs.SetInt("tutor", tutorialNum);
         }
     }
 
