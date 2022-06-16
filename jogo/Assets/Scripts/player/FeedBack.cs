@@ -22,7 +22,7 @@ public class FeedBack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("tutor") > -1)
+        if (PlayerPrefs.GetInt("tutor") > 0)
         {
             tutorialNum = PlayerPrefs.GetInt("tutor");
         }
@@ -30,6 +30,8 @@ public class FeedBack : MonoBehaviour
         {
             tutorialNum = -1;
         }
+
+        print(tutorialNum);
     }
 
     // Update is called once per frame
